@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js中call、apply、bind方法</title>
+</head>
+<body>
+	<script>
+		/*write start*/
+		/**
+		*通用输出方法
+		*str1输出标题
+		*str2标题对应的数据
+		*/
+		function write(str1,str2){
+			document.write('<br/>'+str1+":"+str2)
+		}
+		/*end*/
+		/*call start*/
+		write('call方法','<br/>');
+		var obj1={
+			user:'call',
+			fn:function(){
+				write('对象obj1中call方法',this.user);//call
+			}
+		}
+		write('原来的obj1对象',JSON.stringify(obj1));
+		var obj1_1=obj1.fn;
+		write('obj1_1',obj1_1);
+		obj1_1.call(obj1);
+		write('obj1',JSON.stringify(obj1));
+		//注:1.输出对象不会输出对应的函数;2.obj1_1在call方法后会自动执行 相当于obj1_1(),只是this指向值改变
+		var o2={
+			user:'o2',
+			fn:function(e1,e2){
+				// user='o2_fn';
+				// write('user',user);//报错 user is not defined 1.不是window.user  2.user属于fn函数内部的变量 不能访问到o2中的user变量,需要通过改变this的指向 3.缺少this指向
+				write('this.user',this.user);
+				write('this',JSON.stringify(this));
+				write('o2中第1个参数',e1);
+				write('o2中第2个参数',e2);
+			}
+		}
+		var o2_1=o2.fn;
+		o2_1.call(o2,'o2_1','o2_2');//o2中fn函数中的this指向o2
+		/*end*/
+		/*apply与 call方法类似,也是改变this的值,只是传的第二个参数必须是数组,call方法除第一个参数外,后面的所有参数都是传送的参数值 start*/
+		/*end*/
+		/*call、apply第一个参数是null this指向window start*/
+		write('<br/>call、apply第一个参数是null this指向window','<br/>');
+		var o3={
+			user:'o3',
+			fn:function(){
+				write('o3中call或apply方法第一个参数为null时this.user',this.user);
+				write('o3中call或apply方法第一个参数为null时this',this);
+			}
+		}
+		var o3_1=o3.fn;
+		o3_1.call(null);
+		var o3_2=o3.fn;
+		o3_2.apply(null);
+		/*end*/
+		/*bind start*/
+		write('<br/>bind','<br/>');
+		var o4={
+			user:'o4',
+			fn:function(){
+				write('o4中this.user',this.user);
+				write('o4中this',this.user);
+			}
+		}
+		var o4_1=o4.fn;
+		o4_1.bind(o4)();
+		//注:1.bind方法绑定后不能立即执行,需要被()调用后才能执行 2.返回的是一个修改过后的函数
+		var o4_2=o4.fn;
+		var o4_2_1=o4_2.bind(o4);
+		o4_2_1();
+		window.o4_2_1();
+		var o5={
+			user:'o5',
+			fn:function(e1,e2,e3){
+				write('<br/>o5中this.user',this.user);
+				write('o5中this',JSON.stringify(this));
+				write('o5中第1个参数',e1);
+				write('o5中第2个参数',e2);
+				write('o5中第3个参数',e3);
+			}
+		}
+		var o5_1=o5.fn;
+		var o5_1_1=o5_1.bind(o5,1)();//this指向o5
+		var o5_1_2=o5_1.bind(o5,2);
+		o5_1_2(2,3);//this也指向o5
+		/*end*/
+	</script>
+</body>
+</html>
