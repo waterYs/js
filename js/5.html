@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js</title>
+</head>
+<body>
+	<script>
+		/*js字符串start*/
+		document.write('js字符串：'+'<br/>');
+		var a1='It is a1';
+		var b1="It is b1";
+		var c1='It\'s c1';
+		var d1='It is \'d1\'';
+		var e1='It is "e1"';
+		document.write('<br/>a1:',a1," 注:单引号<br/>");
+		document.write('b1:',b1," 注:双引号<br/>");
+		document.write('c1:',c1," 注:单引号用\'代表引号<br/>");
+		document.write('d1:',d1," 注:单引号中用\'代替引号<br/>");
+		document.write('e1:',e1," 注:单引号中套用双引号<br/>");
+		/*end*/
+		/*js数字类型start*/
+		document.write('<br/>js数字类型：');
+		var x1=34.00;
+		var x2=34;
+		var y=123e5;
+		var z=123e-5;
+		document.write('<br/>x1:',x1);
+		document.write('<br/>x2:',x2);
+		document.write('<br/>y:',y);
+		document.write('<br/>z:',z);
+		/*end*/
+		/*js数组start*/
+		document.write('<br/><br/>js数组<br/>')
+		var cars=new Array();
+		cars[0]='car0';
+		cars[1]='car1';
+		cars[2]='car2';
+		for(var i=0;i<cars.length;i++){
+			document.write('cars数组中的下标'+i+'为:'+cars[i]+'<br/>');
+		}
+		//数组有4种方式
+		document.write('<br/>数组有4种方式:');
+		var arr1=new Array('a,b,c,d,e');//创建时就初始化
+		var arr2=['a','b','c','d','e'];//简洁、直观
+		var arr3=new Array();//空数组
+		var arr4=[];//空数组
+		document.write('<br/>arr1:'+arr1);
+		document.write('<br/>arr2:'+arr2);
+		document.write('<br/>arr3:'+arr3);
+		document.write('<br/>arr4:'+arr4+'<br/>');
+		/*end*/
+		/*js中数据类型undefined 和 null start*/
+		document.write('<br/>js中数据类型undefined和null<br/>');
+		var person;
+		var person1='person1';
+		document.write('person:'+person+'<br/>');
+		document.write('person1:'+person1+'<br/>');
+		var person1=null;
+		document.write('person1:'+person1);
+		/*end*/
+		/*声明新变量类型用new start*/
+		document.write('<br/><br/>声明新变量类型用new');
+		var _num=new Number;
+		var _string=new String;
+		var _boolean=new Boolean;
+		var _array=new Array();
+		var _obj=new Object();
+		document.write('<br/>_num:'+_num);
+		document.write('<br/>_string:'+_string);
+		document.write('<br/>_boolean:'+_boolean);
+		document.write('<br/>_array:'+_array);
+		document.write('<br/>_obj:'+_obj);
+		/*end*/
+		/*js对象的创建start*/
+		document.write('<br/><br/>对象的创建:');
+		var people1={name:'John Doe',age:27,eat:function(){}};//推荐
+		var people2=new Object();//先创建对象,再添加属性和方法
+		people2.name='Tom';
+		people2['age']='30';
+		people2['eat']=function(){}
+		document.write('<br/>对象people1:'+JSON.stringify(people1));
+		document.write('<br/>对象people2:'+JSON.stringify(people2));
+		document.write('<br/>最常用的对象创建方式:');
+		function Demo1(){
+			var obj=new Object();
+			obj.name='zhagnsan';
+			obj.age='29';
+			obj.firstF=function(){}
+			obj.secondF=function(){}
+			return obj;
+		}
+		var one1=Demo1();//调用
+		document.write('<br/>调用Demo1函数,并打印出对象属性age:'+one1.age);
+		function Demo2(){
+			this.name='lisi';
+			this.age=30;
+			this.firstF=function(){}
+			this.secondF=function(){}
+			document.write('<br/>this:'+this);
+		}
+		// var one2=new Demo2();//调用  注:必须new  否则报错 this指向问题	this指向window	
+		// document.write('<br/>调用Demo2函数,并打印出对象属性age:'+one2.age);
+		// Demo2();//this指向window
+		// document.write('<br/>直接执行Demo2函数,并打印出对象属性age:'+Demo2.age);//函数可以点击获取内部变量
+		//值得思考的问题:1.this的指向
+		/*end*/
+		//注:JavaScript 变量均为对象。当您声明一个变量时，就创建了一个新的对象。
+	</script>
+</body>
+</html>

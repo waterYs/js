@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js中this的指向 this的用法</title>
+</head>
+<body>
+	<script>
+		/*概述 start*/
+		document.write('<br/>概述:this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁，实际上this的最终指向的是那个调用它的对象（这句话有些问题，后面会解释为什么会有问题，虽然网上大部分的文章都是这样说的，虽然在很多情况下那样去理解不会出什么问题，但是实际上那样理解是不准确的，所以在你理解this的时候会有种琢磨不透的感觉）<br/>')
+		/*end*/
+		/*f1 start*/
+		function f1() {
+			var user='张三';
+			console.log(this.user);//undefined
+			console.log(this);//window
+			document.write('<br/>函数f1中this的指向:');
+			document.write('<br/>user:'+user);
+			document.write('<br/>this.user:'+this.user);
+			document.write('<br/>this:'+this+'<br/>');
+		}
+		f1();//调用f1
+		window.f1();
+		document.write('<br/>这里的函数f1实际是被Window对象所点出来的<br/>');
+		//注:这里的函数f1实际是被Window对象所点出来的
+		/*end*/
+		/*f2 start*/
+		var f2={
+			user:'张三',
+			fn:function(){
+				// console.log(user);//报错 user没有被定义
+				console.log(this.user);//张三
+				document.write('<br/>f2对象中this的指向:');
+				// document.write('<br/>user:'+user);//报错 user没有被定义
+				document.write('<br/>this.user:'+this.user);
+				document.write('<br/>this:'+JSON.stringify(this)+"<br/>");
+			}
+		}
+		f2.fn();//调用
+		document.write('<br/>f2.user:'+f2.user+'<br/>');
+		//注:这里的f2.user为张三 user是被f2所调用,this指向f2,而f2中的user为张三
+		function f2_1(){
+			user='张三';
+			function fn(){
+				document.write('f2_1函数中this指向:');
+				document.write('<br/>user:'+user);
+				document.write('<br/>this.user:'+this.user);
+				document.write('<br/>this:'+this);
+			}
+		}
+		var aaa=f2_1.user;//调用  注:这样调用不了f2_1里面的fn方法和变量user
+		document.write('aaa:'+aaa+'<br/>');//undefined  这里的aaa相当于window.aaa 没有赋值
+		//注:外部函数不能调用内部函数的方法 如f2_1 不能调用它内部的fn方法
+		function f2_2(){
+			user='张三';
+			function fn(){
+				document.write('f2_2函数中this指向:');
+				document.write('<br/>user:'+user);
+				document.write('<br/>this.user:'+this.user);
+				document.write('<br/>this:'+this);
+			}
+			return fn();
+		}
+		f2_2();//注:也不能调用f2_2中的fn方法
+		/*end*/
+		/*f3 start*/
+		document.write('<br/><br/>f3中this 指向:');
+		var f3={
+			a:10,
+			b:{
+				a:12,//注:如果注释后,fn中this={},this.a=undefined
+				fn:function(){
+					// document.write('<br/>a:'+a);//报错 a is not defined
+					document.write('<br/>this.a:'+this.a);//12
+					document.write('<br/>this:'+JSON.stringify(this));//{a:12}
+					// return console.log(a);//报错
+				}
+			}
+		}
+		f3.b.fn();
+
+		//注:1.如果一个函数中有this，这个函数中包含多个对象，尽管这个函数是被最外层的对象所调用，this指向的也只是它上一级的对象  f3中this指向为b对象的{a:12};2.如果注释b.a这个属性,b.f中this.a=undefined;this={}
+		/*end*/
+		/*f4 start*/
+		document.write('<br/><br/>f4 中this指向');
+		var f4={
+			a:10,
+			b:{
+				a:12,
+				fn:function(){
+					document.write('<br/>this.a:',this.a);//undefined
+					document.write('<br/>this',this);//window
+				}
+			}
+		}
+		var f4_1=f4.b.fn;
+		f4_1();//相当于window.f4_1()
+		var f4_2=f4.b.fn();//与 f3.b.fn()中this指向一样,this={a:12} 
+		//注:this永远指向的是最后调用它的对象，也就是看它执行的时候是谁调用的
+		/*end f4*/
+		/*构造函数this start*/
+		document.write('<br/><br/>构造函数this');
+		function F5(){
+			this.user='构造函数5'
+		}
+		var f5=new F5();
+		document.write('<br/>f5.user:',f5.user);//构造函数5
+		//注:1.new F5只是创建一个实列;2.f5=new F5()调用实列,f5调用了F5的实列,相当于调用了F5
+		/*end*/
+		/*this 遇到 return时 start*/
+		document.write("<br/><br/>this遇到return 时:");
+		function f6(){
+			this.user='f6';
+			return {};//如果返回的是{}、function,this就指向返回的对象。否则如果返回1、undefined,那么this指向实例对象f6_1  但是null特殊，它是对象,this任然指向f6_1
+		}
+		var f6_1=new f6;
+		document.write('<br/>f6_1.user:'+f6_1.user);//underfined
+		document.write('<br/>注:如果返回值是一个对象，那么this指向的就是那个返回的对象，如果返回值不是一个对象那么this还是指向函数的实例。');
+		//注:如果返回值是一个对象，那么this指向的就是那个返回的对象，如果返回值不是一个对象那么this还是指向函数的实例。
+		/*end*/
+		/*知识点补充 start*/
+		document.write('<br/><br/>1.在严格版中的默认的this不再是window，而是undefined。\
+　　2.new操作符会改变函数this的指向问题，');
+		//new实例化对象的过程
+		document.write('<br/>new实例化对象的过程：');
+		function f7(){
+			this.num=1;
+		}
+		var f7_1=new f7();
+		document.write('<br/>f7中的this为什么会指向f7_1:1.new关键字会创建一个空的对象;2.这个空对象会自动调用一个apply方法;3.将this指向这个空对象  具体代码:f7.apply({},new f7())')
+		/*end*/
+	</script>
+</body>
+</html>

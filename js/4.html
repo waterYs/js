@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js</title>
+	<p id='demo'>这是一个段落</p>
+	<button type="button" onclick='myClick()'>点击改变段落</button>
+</head>
+<body>
+	<script>
+		var x=1;
+		var y=2;
+		var z=3;
+		var a;
+		document.write(x+"<br/>");
+		document.write(y+"<br/>");
+		document.write(z+"<br/>");
+		function myClick() {
+			document.getElementById('demo').innerHTML=x+y+z;
+		}
+		console.log('a:',a);//未申明的变量值为undefined
+		/*a1的值任然是a1 start*/
+		var a1='a1';
+		var a1;
+		console.log('a1',a1);
+		/*end*/
+		/*var 与 let 申明的变量区别 start*/
+		varText();
+		function varText(){
+			var x=1;
+			if(true){
+				var x=2;
+				console.log('var1',x);//2
+			}
+			console.log('var2:',x);//2
+		}
+		letText()
+		function letText(){
+			let x=1;
+			if(true){
+				let x=2;
+				console.log('let1:',x);//2
+			}
+			console.log('let2:',x);
+		}
+		//注:在Function中局部变量推荐使用let变量，避免变量名冲突。		
+		/*end*/
+		/*var申明的变量可能是 全局变量 也可能是 window的一个属性start*/
+		var num1=1;//全局变量
+		num2=2;//window.num2属性
+		delete num1;//无法删除
+		delete num2;//能删除
+		console.log('num1:',num1,'num1的值没有被删除,能展示出来');
+		document.write('num1: '+num1+' num1的值没有被删除,能展示出来');
+		document.write('<br/>更多数据详情打开控制台Console查看！');
+		// console.log('num2(报错的原因：num2已经被删除了):',num2);
+		model();
+		function model(){
+			var num1=1;//本地变量
+			num2=2;//window.num2
+			console.log('model函数内定义的num1:',num1);
+			console.log('model函数内定义的num2:',num2);
+			//匿名函数
+			(function(){
+				var num=1;//本地变量
+				num1=2;//继承作用域(闭包)
+				num3=3;//window.num3
+				console.log('匿名函数内部的num:',num);
+				console.log('匿名函数内部的num1:',num1);
+				console.log('匿名函数内部的num3:',num3);
+			}())
+		}
+		/*end*/
+	</script>
+</body>
+</html>
