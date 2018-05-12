@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js</title>
+</head>
+<body>
+	1.局部变量：只能在函数内部访问。
+	2.JavaScript 变量生命周期在它声明时初始化。
+
+3.局部变量在函数执行完毕后销毁。
+
+4.全局变量在页面关闭后销毁。
+</body>
+	<script>
+		var a=1;
+		a=2;
+		let a1=1;
+		a1=2;
+		const a2=1;
+		// a2=2;//报错 Assignment to constant variable.
+		console.log("a:",a,"\r\na1:",a1,"\r\na2:",a2)
+		for(var i=0;i<5;i++){
+
+		}
+		console.log('\r\ni:',i);//能取到i的值,为5
+		for(let j=0;j<5;j++){
+
+		}
+		// console.log('\r\nj:',j); //报错 j is not defined
+		function fn(){
+			let x=1;
+			if(true){
+				// x=2;//不加let就是相同的变量
+				let x=2;//加了let就是不同的变量
+			}
+			console.log('\r\nx:',x);//1或2 取决于fn函数if条件内x是否是相同的变量
+		}
+		fn();
+	</script>
+</html>
