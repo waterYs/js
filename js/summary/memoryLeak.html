@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js内存泄漏</title>
+</head>
+<body>
+	<h1>js常见的几种内存泄漏</h1>
+	<p>1.意外的全局变量</p>
+	<p>2.没有及时清理的计时器或回调函数</p>
+	<p>3.脱离dom的引用</p>
+	<p>4.闭包</p>
+	<p>5.echart不停调用</p>
+	<div>
+		<button type="button" id="create">创建节点</button>
+		<button type="button" id="delete">删除节点</button>
+		<button type="button" id="push">数组添加元素</button>
+		<button type="button" id="splice">数组删除元素</button>
+	</div>
+	<div id="dom"></div>
+	<div id="array"></div>
+	<script>
+		/*全局方法write start*/
+		function write(str1,str2) {
+			document.write('<br/>'+str1+':',str2+'<br/>');
+		}
+		/*end*/
+		/*1.意外的全局变量 start*/
+		var home='这是一个全局变量home';
+		//注:1.全局变量由this创建,如果一个函数fn里有this.name变量,而这个函数被window调用。也生成了全局变量
+		/*end*/
+		/*清楚计时器 start*/
+		function t1() {
+			var time1=setInterval(function(){
+				write("开始执行setInterval计时器");
+				clearInterval(time1);
+				write('清除setInterval计时器');
+			},500)
+		}
+		// t1();
+		/*end*/
+		/*脱离dom引用 start*/
+		var eleArray=[];
+		var num=10000;
+		function creatDom(){
+			var dom=document.getElementById('dom');
+			for(var i=0;i<num;i++){
+				var p=document.createElement('p');
+				p.id='p'+i;
+				p.innerHTML='这是第'+i+'个p元素';
+				dom.appendChild(p);
+			}
+		}
+		// creatDom();//添加节点
+		document.getElementById('create').addEventListener('click',creatDom,false);//添加节点
+		function deleteDom(){
+			var dom=document.getElementById('dom');
+
+			dom.innerHTML='';
+		}
+		document.getElementById('delete').addEventListener('click',deleteDom,false);//删除节点
+		function push(){
+			for(var i=0;i<num;i++){
+				eleArray.push(i);
+			}
+			document.getElementById('array').innerHTML=eleArray;
+		}
+		document.getElementById('push').addEventListener('click',push,false);//数组添加元素
+		function splice(){
+			if(eleArray.length>0){
+				eleArray.splice(0);
+			}
+			document.getElementById('array').innerHTML=eleArray;
+		}
+		document.getElementById('splice').addEventListener('click',splice,false);//数组删除元素
+		/*end*/
+	</script>
+</body>
+</html>
