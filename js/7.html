@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js</title>
+</head>
+<body>
+	<button type="button" onclick="myClick('你好,','小明')">点击</button>
+	<p id="demo"></p>
+	<input type="checkbox" name="checkbox" id="check">
+	<label for="">男</label>
+	<input type="checkbox" name="checkbox" id="check1">
+	<label for="">女</label>
+	<button type='button' id='selectAll' onclick='checkBox("checkbox")'>全选</button>
+	<button type='button' id='unSelectAll' onclick="unCheckBox('checkbox')">取消全选</button>
+	<button type='button' id='selectAllBoolean' onclick="checkBox1()">反选</button>
+	<script>
+		function myClick(e1,e2) {
+			document.getElementById('demo').innerHTML=e1+e2;
+		}
+		//注:1.使用return语句时,停止执行该函数,跳过该函数继续执行;2.只要函数运行完毕,本地变量就会被删除,即局部变量会被删除 内存得到释放
+		var a='a1';
+		console.log(Number(a));//NaN
+		var str='str';
+		console.log('str:',String(str));//str
+		function checkBox(objName){
+			var objNameList=document.getElementsByName(objName); 
+			if(objNameList!=null){
+				for(var i=0;i<objNameList.length;i++){
+					objNameList[i].checked='checked';
+				}
+			}
+		}
+		document.getElementById('selectAll').addEventListener('click',checkBox('checkbox'),false);//全选
+		function unCheckBox(objName){
+			var objNameList=document.getElementsByName(objName); 
+			if(objNameList!=null){
+				for(var i=0;i<objNameList.length;i++){
+					objNameList[i].checked='';
+				}
+			}
+		}
+		document.getElementById('unSelectAll').addEventListener('click',unCheckBox('checkbox'),false);//取消全选
+		var checkAll=false;
+		function checkBox1(){
+			var objNameList=document.getElementsByName('checkbox');
+			checkAll=!checkAll;
+			if(objNameList!=null){
+				for(var i=0;i<objNameList.length;i++){
+					objNameList[i].checked=checkAll;
+				}
+			}
+		}
+		/*箭头函数 start*/
+		var f1=(a,b)=>{//多个参数加括号
+			return a+b;
+		}
+		var f2=a=>{//一个参数
+			return a;
+		}
+		console.log('a+b=',f1(2,3));
+		console.log('a:',f2(5));
+		/*end*/
+	</script>
+</body>
+</html>
