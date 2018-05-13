@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js 鼠标滚轮事件</title>
+	<style>
+		#div1,#div2{
+			position: fixed;
+
+		}
+		#div2{
+			margin-top: 100px;
+		}
+	</style>
+</head>
+<body style="height: 1000px;">
+	<div>
+		detail与wheelDelta
+判断滚轮向上或向下在浏览器中也要考虑兼容性，现在五大浏览器（IE、Opera、Safari、Firefox、Chrome）中Firefox 使用detail，其余四类使用wheelDelta；两者只在取值上不一致，代表含义一致，detail与wheelDelta只各取两个 值，detail只取±3，wheelDelta只取±120，
+
+<h1>注:1.wheelDeta:正数代表鼠标向上滚动,负数代表向下滚动；2.detail:正数代表鼠标向下滚动，负数代表鼠标向上滚动（与wheelDeta方向相反）</h1>
+	</div>
+	<div id="div1"><label>IE/Opera/Chrome滚动值</label><input type="text" id="wheelDelta"></div>
+	<div id="div2"><label>fixfire滚动值</label><input type="text" id="detail"></div>
+	<script>
+		var fn=function(e){
+			var direct=0;//代表方向
+			var e=e||window.event;
+			var t1=document.getElementById('wheelDelta');
+			var t2=document.getElementById('detail');
+			if(e.wheelDelta){
+				t1.value=e.wheelDelta;
+			}else if(e.detail){
+				t2.value=e.detail
+			}
+		}
+		//注册事件
+		if(document.addEventListener){
+			document.addEventListener('DOMMouseScroll',fn);//w3c  forfixe
+			// document.addEventListener('wheel',fn);//IE/Opera/Chrome/Safari mousewheel事件废弃后
+			document.addEventListener('mousewheel',fn);//IE/Opera/Chrome/Safari mousewheel事件还未废弃前
+			document.getElementById('div1').addEventListener('wheel',fn);//IE/Opera/Chrome/Safari
+			// document.getElementById('div1').addEventListener('wheel',fn);//w3c
+			// document.getElementById('div2').addEventListener('wheel',fn);//w3c
+		}
+
+		// window.onwhell=document.onwhell=fn;//IE/Opera/Chrome/Safari
+	</script>
+</body>
+</html>
