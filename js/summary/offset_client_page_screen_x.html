@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Js event对象offsetX, clientX, pageX, screenX, layerX, x区别</title>
+	<style>
+		*{padding: 0;margin:0;}
+	</style>
+</head>
+<body>
+	<!-- <div id="demo">
+		
+	</div> -->
+	<div id="div0" style="height: 300px;background: red;">
+		<div id="div1" style="height: 100px;background: green;"></div>
+		<div id="div2" style="height: 100px;background: gray;">
+			Js event对象offsetX, clientX, pageX, screenX, layerX, x区别
+		</div>
+	</div>
+	<img src="http://img.blog.csdn.net/20150502094344891?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHpkaW5n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="" width="100%">
+	<script>
+		window.onload=function(){			
+			document.getElementById('div2').onclick=function(e){
+				var e=event||window.event;
+				console.log('offsetX:',e.offsetX);
+				console.log('offsetY:',e.offsetY);
+				console.log('clientX:',e.clientX);
+				console.log('clientY:',e.clientY);
+				console.log('pageX:',e.pageX);
+				console.log('pageY:',e.pageY);
+				console.log('screenX:',e.screenX);
+				console.log('screenY:',e.screenY);
+				console.log('layerX:',e.layerX);
+				console.log('layerY:',e.layerY);
+				console.log('x:',e.x);
+				console.log('y:',e.y);
+			};
+		}
+	</script>
+	<div>
+		1.offset:距离当前节点的距离；
+		2.client：距离浏览器距离
+		3.screen距离窗口距离
+		4.page、layer:距离浏览器窗口距离+页面滚动距离
+		5.x:距离浏览器窗口距离
+	</div>
+</body>
+</html>
