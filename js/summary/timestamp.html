@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js 时间戳</title>
+</head>
+<body>
+	<h1>js时间戳问题，</h1>
+	<h2>详情查看console控制台</h2>
+	<script>
+		var t1=new Date();
+		console.log('中国标准时间t1:',t1);
+		var t1_stamp=Date.parse(t1);
+		console.log('中国标准时间转换成时间戳：t1_stamp:',t1_stamp,'注：只精确到秒，毫秒部分用000代替');
+		var t1_stamp1=t1.valueOf();
+		console.log('中国标准时间转换成时间戳：t1_stamp1:',t1_stamp1,'注：精确到毫秒');
+		var t1_stamp2=t1.getTime();
+		console.log('中国标准时间转换成时间戳：t1_stamp2:',t1_stamp2);
+		var t2=new Date(t1_stamp);
+		console.log('将时间戳t1_stamp、t1_stamp1、t1_stamp2转换成日期格式t2:',t2,'注：将t1_stamp、t1_stamp1、t1_stamp2都转换成标准时间');
+		var year=t1.getFullYear();
+		console.log('year:',year);
+		var month=t1.getMonth();
+		console.log('month:',month,'注：实际月份要加1');
+		var date=t1.getDate();
+		console.log('date:',date);
+		var hours=t1.getHours();
+		console.log('hours:',hours);
+		var minutes=t1.getMinutes();
+		console.log('minutes:',minutes);
+		var seconds=t1.getSeconds();
+		console.log('seconds:',seconds);
+		var date1=new Date('2018/09/16');//设置具体的日期
+		console.log('设置具体的日期date1:',date1,'具体日期的多少号date1.getDate():',date1.getDate());
+		var days=new Date(2018,5,0).getDate();//天数为0时 代表4月份  否则为5月份 
+		console.log('某年某月具体的天数days（如：2018/5）:',days,'注：getMonth获得的月份4要加1，是从0开始计算的'); 
+		// document.write(days);
+	</script>
+</body>
+</html>
