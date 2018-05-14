@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js handleEvent事件监听对象</title>
+</head>
+<body>
+	<div id="demo">点击div</div>
+	<script>
+		var o={
+			handleEvent:function(){
+				alert(this.msg);
+			},
+			msg:'handleEvent事件监听对象'
+		}
+		document.getElementById('demo').addEventListener('click',o,false);
+	</script>
+</body>
+</html>
