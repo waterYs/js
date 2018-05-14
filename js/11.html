@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js</title>
+</head>
+<body>
+	<script>
+		var arr=['a1','a2','a3','a4','a5'];
+		for(var i of arr){
+			console.log('arr '+i+':',i,arr[i],'注：i就为数组arr的元素');
+		}
+		var arr1=new Set([1,1,2,2,3,3,4,4,5,5]);
+		for(var value of arr1){
+			console.log('arr1:',value,arr1[value]);
+		}
+
+	</script>
+	<script>
+		/*循环一个生成器start*/
+		function* fibonacci() { // a generator function
+		  let [prev, curr] = [0, 1];
+		  while (true) {
+		    [prev, curr] = [curr, prev + curr];
+		    yield curr;
+		  }
+		}
+
+		for (let n of fibonacci()) {
+		  console.log(n);
+		  // truncate the sequence at 1000
+		  if (n >= 1000) {
+		    break;
+		  }
+		}
+
+
+		/*end*/
+	</script>
+</body>
+</html>
