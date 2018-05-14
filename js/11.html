@@ -37,5 +37,44 @@
 
 		/*end*/
 	</script>
+	<script>
+		var i=0;
+		while(i<5){
+			console.log('while:',i);
+			i++;
+		}
+		var j=0;
+		do{
+			console.log('dowhile',j);
+			j++;
+		}while(j<5);
+	</script>
+	<script>
+		for(var i=0;i<5;i++){
+			if(i==2){
+				// console.log('i=2时break:',i);
+				// break;
+				console.log('i=2时continue:',i);
+				continue;//跳过这个条件判断，不执行i=2
+			}
+			console.log('以此执行i:',i)
+		}
+	</script>
+	<script>
+		console.log('typeof undefined:',typeof(undefined));
+		console.log('typeof null:',typeof(null));
+		console.log('undefined是否等于null',undefined==null,'注：1.一个等号时，为null；2.两个等号为true;3.3个等号为false');
+		console.log('typeof function:',typeof(function(){}));
+		console.log('typeof NaN:',typeof(NaN));
+		console.log('NaN是否等于undefined',NaN==undefined,'注：不等于（至少2个等号(与null；一样)）');
+		console.log('NaN的构造函数constructor:',NaN.constructor);//function number(){}
+		console.log(Number('你好'));//NaN
+	</script>
+	<h1>
+		5 + null    // 返回 5         null 转换为 0<br/>
+"5" + null  // 返回"5null"   null 转换为 "null"<br/>
+"5" + 1     // 返回 "51"      1 转换为 "1"  <br/>
+"5" - 1     // 返回 4         "5" 转换为 5<br/>
+	</h1>
 </body>
 </html>
