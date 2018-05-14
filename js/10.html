@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js</title>
+</head>
+<body>
+	<h1>字符串：str='hello world!'</h1>
+	<h1>字符串：str1='js'</h1>
+	<script>
+		var str='hello world!';
+		var str1='js';
+		var reg1=str.match(/world/g);
+		var str_replace=str.replace('hello','HELLO');
+		console.log('返回指定位置的字符charAt(1):',str.charAt(1));
+		console.log('返回指定位置的字符Unicode编码charCodeAt(1):',str.charCodeAt(1));
+		console.log('连接两个或更多字符串，并返回新的字符串concat():',str1.concat(str1),'注：1.可以是相同的字符串；2.哪个在前，合并过后的结果就在前');
+		console.log('将 Unicode 编码转为字符fromCharCode:',String.fromCharCode(101),'注：只能用String内置字符串对象');
+		console.log('找到一个或多个正则表达式的匹配match：',reg1,'注：返回的是个数组');
+		console.log('替换与正则表达式匹配的子串replace：',str_replace,'注：1.第一个参数是正则表达式，2.第二个参数是要替换成的内容');
+		console.log('查找与正则表达式相匹配的值search/indexOf:',str.search(/o/),str.indexOf('o'));
+		console.log('返回某个字符串对象的原始值：valueOf:',str.valueOf(str));
+		console.log('大号字体显示字符串:',str.big());
+		document.write('<br/>大号字体：',str.big());
+		document.write('<br/>闪动字体:',str.blink());
+		document.write('<br/>粗体字体:',str.bold());
+		document.write('<br/>打印机文本字体:',str.fixed());
+	</script>
+</body>
+</html>
