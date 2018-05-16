@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js 数组去重</title>
+	<h1>console.log()命令查看</h1>
+</head>
+<body>
+	<script>
+		var arr=[1,1,2,2,3,3,4,4,5,5];//需要去重的数组
+		var arr1=[];//新数组
+		function fn1(){	
+			arr1=[];
+			for(var i=0;i<arr.length;i++){
+				arr1.push(arr[i]);
+				for(var j=1;j<=i;j++){
+					if(arr1[j]==arr1[i]){
+						arr1.pop(arr[i]);
+					}
+				}
+			}
+			console.log('fn1:',arr1);
+			
+		}
+		fn1();//这种方法不能去重
+		function fn2(){
+			arr1=[];
+			for(var i=0;i<arr.length;i++){
+				if(arr1.indexOf(arr[i])==-1){
+					arr1.push(arr[i]);
+				}
+			}
+			console.log('fn2:',arr1);
+		}
+		fn2();
+		function fn3(){
+			arr1=[];
+			for(var i=0;i<arr.length;i++){
+				if(arr.indexOf(arr[i])==i){//数组元素的值出现的首次位置跟i相等时，此时这个元素时该数组元素出现的第一次
+					arr1.push(arr[i]);
+				}
+			}
+			console.log('fn3:',arr1);
+		}
+		fn3();
+	</script>
+</body>
+</html>
