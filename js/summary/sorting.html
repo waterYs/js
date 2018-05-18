@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js 十大排序算法</title>
+</head>
+<body>
+	<h1>js 十大算法</h1>
+	<h1>console.log</h1>
+	<script>
+		var arr=[3,1,5,7,2,4,9,10,6,8]
+		function fn1() {
+			var len = arr.length;
+			for(var i=0;i<len;i++){
+				for(var j=0;j<len-1-i;j++){//i=0,len-1-i=9,j<9  i=9,len-1-i=0,j<0(不存在)
+					if(arr[j]>arr[j+1]){//
+						var temp=arr[j+1];//
+						arr[j+1]=arr[j];//
+						arr[j]=temp;//
+					}
+				}
+			}
+		    console.log('冒泡排序fn1:',arr,'注：比较相邻的两个元素，如果前一个比后一个大，则交换位置');
+		    return arr;
+		}
+		fn1();
+	</script>
+</body>
+</html>
