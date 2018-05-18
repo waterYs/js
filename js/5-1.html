@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js</title>
+</head>
+<body>
+	<script>
+		/*全局方法write start*/
+		function write(str1,str2) {
+			document.write('<br/>'+str1+':',str2+'<br/>');
+		}
+		/*end*/
+		/*判断是否是数组 start*/
+		var a1=[1,2,3];
+		if(Array.isArray){//是否支持该方法
+			if(Array.isArray(a1)){
+				write('该对象是一个数组',a1+'(Array.isArray判断)');
+			}
+
+		}
+		if(a1 instanceof Array){
+			write('该对象是一个数组',a1+'(instanceof判断)');
+		}
+		write('typeof',typeof a1);
+		write('Array',Array.isArray(a1));
+		write('instanceof',a1 instanceof Array);
+		/*end*/
+	</script>
+</body>
+</html>

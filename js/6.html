@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js</title>
+</head>
+<body>
+	<script>
+		/*write start*/
+		function write(str1,str2) {
+			document.write('<br/>'+str1+':',str2+'<br/>');
+		}
+		/*end*/
+		/*对象 start*/
+		var o={
+			firstName:'zhang',
+			lastName:'san',
+			fullName:function(){
+				// console.log(firstName,lastName);
+				// write(this.firstName,this.lastName)
+				return this.firstName+this.lastName
+			}
+		}
+		o.fullName();
+		write('o.fullName',o.fullName);
+		write('o.fullName()',o.fullName());
+		/*end*/
+		//注:javaScript对象中属性具有唯一性（这里的属性包括方法），如果有两个重复的属性，则以最后赋值为准
+		
+	</script>
+</body>
+</html>

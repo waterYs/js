@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js</title>
+</head>
+<body>
+	<p id="demo"></p>
+	<button type="button" onclick="document.getElementById('demo').innerHTML=Date()">现在的时间是？</button>
+	<button type="button" onclick="this.innerHTML=Date()">现在的时间是？</button>
+	<button oncontextmenu="this.innerHTML='右键击中'">点击鼠标右键</button>
+	<button ondblclick="this.innerHTML='鼠标已经双击'">鼠标双击</button>
+	<button onmousemove="this.innerHTML='鼠标移动！！！！！！！！！！！！！'">鼠标移动</button>
+	<button onkeydown="this.innerHTML='键盘按键已经被按下'">键盘按键按下</button>
+	<button onkeypress="this.innerHTML='键盘按键按下时！'">键盘按键按下时</button>
+	<p>
+注意： 在所有浏览器中 onkeypress 事件不是适用于所有按键(如： ALT, CTRL, SHIFT, ESC)。监听一个用户是否按下按键请使用 onkeydown 事件,所有浏览器都支持 onkeydown 事件。
+</p>
+	<!-- <img src="http://img4.eva.chengdu.cn/zt/5a9778206f86a.jpg" alt="网上图片" onabort="this.innerHTML='图片加载被中断'"> -->
+	<!-- <p onbeforeunload='this.innerHTML="alert("刷新或关闭")"'>刷新或离开页面时触发该事件</p> -->
+	<p onpageshow="alert('onpageshow')">onpageshow</p>
+	<p onpagehide="alert('onpagehide')">onpagehide</p>
+	<p onscroll="alert('onscroll')">onscroll</p>
+	<input type="text" onfocusin='this.style.background="red"' onfocusout='this.style.background="green"'>
+	 1.onfocusin 事件类似于 onfocus 事件。 主要的区别是 onfocus 事件不支持冒泡。因此，如果你想知道元素或者其子元素是否获取焦点，需要使用 onfocusin 事件。
+	 <input type="text" oninput="this.style.background='red'">
+	 <form action="" id="form1">
+	 	<input type="text" id="txt1">
+	 	<input type="text">
+	 	<button onreset="document.getElementById('txt1').reset()">reset重置表单</button>
+	 </form>
+	 <input type="search" onsearch='alert("onsearch事件触发")'  onselect="alert('onselect事件')">
+	 <select name="" id="">
+	 	<option value="1">1</option>
+	 	<option value="2">2</option>
+	 	<option value="3">3</option>
+	 </select>
+	 <input type="" name="" oncopy='alert("oncopy")' onafterprint='alert("onafterprint")'>
+	<script type="text/javascript">
+		function keydow(event) {
+			switch(event.keyCode){
+				case 37:
+					alert('左键');
+					break;
+				case 39:
+					alert('右键');
+					break
+
+			}
+		}
+		keydow('keydown');
+		function fn(){
+			alert('刷新或关闭页面触发');
+		}
+		window.onpageshow=function(){
+			// alert('onpageshow加载页面');
+		}
+		window.onpagehide=function(){
+			// alert('onpagehide跳转到另一个页面');
+		}
+		window.onscroll=function(){
+			console.log('onscroll');
+		}
+		window.onbeforeunload=function(e){
+			// return alert(1);
+		}
+		window.onunload=function(){
+			// alert('onunload退出页面')
+		}
+
+	</script>
+	<p draggable='true' ondrag="console.log('ondrag')" ondragend="console.log('ondragend')" ondragenter="console.log('ondragenter')" ondragleave="console.log('ondragleave')" ondragover="console.log('ondragover')" ondragstart="console.log('ondragstart')" ondrop='console.log("ondrop")'>ondrag拖动</p>
+	<video onabort='console.log("onabort")'></video>
+	<div id="myDiv">在该div上滚动时触发滚轮事件</div>
+	<script>
+		document.getElementById('myDiv').addEventListener('wheel',myFunction);
+		function myFunction(){
+			document.getElementById('myDiv').style.backgroundColor='red';
+		}
+	</script>
+	<div>		
+		<ul id="ul1"">
+			<li id="li1">li标签1</li>
+			<li id="li2">li标签2</li>
+			<li id="li3">li标签3</li>
+		</ul>
+		<h1>
+			总结——
+			1.冒泡与捕获都是从当前节点向上或向下触发事件的；
+			2.事件默认为冒泡事件；
+		</h1>
+	</div>
+	<script>
+		// document.getElementById('ul1').onclick=function(){
+		// 	console.log('ul1');
+		// };
+		// document.getElementById('li1').onclick=function(){
+		// 	console.log('li1');
+		// };
+		//总结：冒泡，点击子节点，触发子节点的事件，在看父节点有没有相同的事件，如果有相同的事件，还会触发父节点的这个相同的事件
+		document.getElementById('ul1').addEventListener('click',function(){
+			console.log('ul1');
+		},true);
+		document.getElementById('li1').onclick=function(){
+			console.log('li1');
+		};
+		// document.getElementById('li1').addEventListener('click',function(){
+		// 	console.log('li1');
+		// },true);
+	</script>
+</body>
+</html>
